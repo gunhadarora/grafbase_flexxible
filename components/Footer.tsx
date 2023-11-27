@@ -1,0 +1,60 @@
+import { footerLinks } from "@/constants";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+
+type ColumnProps = {
+  title: string;
+  links: Array<string>;
+};
+
+const FooterColumn = ({ title, links }: ColumnProps) => (
+  <div className="flex-1 flex flex-col gap-3 text-sm min-w-max">
+    <h4 className="font-semibold">{title}</h4>
+    <ul className="flex flex-col gap-2 font-normal text-xs">
+      {links.map((link) => (
+        <Link key={link} href={"/"}>
+          {link}
+        </Link>
+      ))}
+    </ul>
+  </div>
+);
+
+const Footer = () => {
+  return (
+    <footer className="flex justify-start items-center flex-col lg:px-20 py-6 px-5 w-full gap-20 bg-light-white">
+      <div className="flex flex-col gap-12 w-full">
+        <div className="flex flex-col items-start">
+          <Image
+            src="/logo-purple.svg"
+            width={115}
+            height={38}
+            alt="Flexxible"
+          />
+          <p className="text-sm font-normal mt-5 max-w-xs">
+            Flexibble is the world&apos;s leading community for creatives to
+            share, grow, and get hired.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-12">
+          {footerLinks.map((item) => (
+            <FooterColumn
+              key={item.title}
+              title={item.title}
+              links={item.links}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-between items-center max-sm:flex-col w-full text-sm font-normal">
+        <p>@2023 Flexxible. All rights reserved.</p>
+        <p className="text-gray">
+          <span className="text-black font-semibold">40</span> projects submitted
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
